@@ -14,13 +14,15 @@ import { mainListItems } from './components/ListItems';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import PriceBox from './components/PriceBox';
+import { Product } from '../../core/domain/Product';
 
 interface DashboardViewProps {
   toggleDrawer: () => void;
   open: boolean;
+  products: Product[];
 }
 
-const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open }) => {
+const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, products }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -58,10 +60,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open }) => 
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
-            <PriceBox title={'Jamon cocido x 100gr'} price={'$250.00'} />
-            <PriceBox title={'Queso danbo x 100gr'} price={'$220.00'} />
-            <PriceBox title={'Muzarella x KG'} price={'$950.00'} />
-            <PriceBox title={'Paleta especial x 100gr'} price={'$200.00'} />
+            {products.map((product: Product, index: number) => <PriceBox key={index} title={product.name} price={'$' + product.averagePrice} /> )}
           </Grid>
           <Footer />
         </Container>

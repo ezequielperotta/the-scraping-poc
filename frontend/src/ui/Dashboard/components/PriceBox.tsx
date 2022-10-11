@@ -7,14 +7,16 @@ import { Paper } from '@mui/material';
 interface PriceBoxProps {
   title: string;
   price: string;
+  imageUrl: string
 }
 
-const PriceBox: React.FC<PriceBoxProps> = ({ title, price }) => {
+const PriceBox: React.FC<PriceBoxProps> = ({ title, price, imageUrl }) => {
   return (
     <Grid item xs={3}>
       <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
         <React.Fragment>
           <Title>{title}</Title>
+          <img src={imageUrl} />
           <Typography color="text.secondary" sx={{ flex: 1 }}>
             Precio promedio
           </Typography>

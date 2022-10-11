@@ -60,7 +60,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, produ
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
-            {products.map((product: Product, index: number) => <PriceBox key={index} title={product.name} price={'$' + product.averagePrice} /> )}
+            {products.map((product: Product, index: number) => <PriceBox key={index} title={product.name} price={'$' + product.averagePrice} imageUrl={product.sources[0].imageUrl} /> )}
           </Grid>
           <Footer />
         </Container>

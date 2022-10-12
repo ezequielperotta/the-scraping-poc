@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import ScrapingController from '@/controllers/scraping.controller';
 import { Routes } from '@interfaces/routes.interface';
+import cors from 'cors';
 
 class ScrapingRoute implements Routes {
   public path = '/scraping';
@@ -12,7 +13,7 @@ class ScrapingRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.scrapingController.getData);
+    this.router.get(`${this.path}`, cors(), this.scrapingController.getData);
   }
 }
 

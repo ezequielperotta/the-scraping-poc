@@ -15,6 +15,10 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import PriceBox from './components/PriceBox';
 import { Product } from '../../core/domain/Product';
+import Typography from '@mui/material/Typography';
+import CustomModal from './components/CustomModal';
+import { useState } from 'react';
+import { Source } from '../../core/domain/Source';
 
 interface DashboardViewProps {
   toggleDrawer: () => void;
@@ -23,6 +27,20 @@ interface DashboardViewProps {
 }
 
 const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, products }) => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [productName, setProductName] = useState<string>('');
+  const [priceS1, setPriceS1] = useState<string>('');
+  const [priceS2, setPriceS2] = useState<string>('');
+  const [priceS3, setPriceS3] = useState<string>('');
+
+  const handleProductSelection = (sources: Source[], productName: string) => {
+    setProductName(productName);
+    setPriceS1(sources[0].price);
+    setPriceS2(sources[1].price);
+    setPriceS3(sources[2].price);
+    setOpenModal(true);
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -59,8 +77,16 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, produ
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <CustomModal
+            open={openModal}
+            setOpen={setOpenModal}
+            priceS1={priceS1}
+            priceS2={priceS2}
+            priceS3={priceS3}
+            productName={productName}
+          />
           <Grid container spacing={3}>
-            {products.map((product: Product, index: number) => <PriceBox key={index} title={product.name} price={'$' + product.averagePrice} imageUrl={product.sources[0].imageUrl} /> )}
+            {products.map((product: Product, index: number) => <PriceBox key={index} title={product.name} price={'$' + product.averagePrice} imageUrl={product.sources[0].imageUrl} sources={product.sources} handleProductSelection={handleProductSelection} /> )}
           </Grid>
           <Footer />
         </Container>

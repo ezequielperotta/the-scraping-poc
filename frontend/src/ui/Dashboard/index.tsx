@@ -13,19 +13,16 @@ const Dashboard: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const productList = new GetProductList(scrapingService);
 
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const prods = await productList.execute();
-        setProducts(prods);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    console.log(products);
-    init();
+  useEffect(() => { init().then(); }, []);
 
-  }, []);
+  const init = async () => {
+    try {
+      const prods = await productList.execute();
+      setProducts(prods);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const toggleDrawer = () => setOpen(!open);
 

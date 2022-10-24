@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import FiambresCarrefour from './../data/Fiambres - Carrefour.json';
 import MayonesasCarrefour from './../data/Mayonesa – Carrefourxlsx.json';
 import LechesCarrefour from './../data/Leches - Carrefour.json';
@@ -111,6 +112,125 @@ class ScrapingService {
   public async getData(): Promise<any[]> {
     const dataGroupByMarketplaces = this.buildGroupedDataByMarketplace();
     const data = this.searchProducts(dataGroupByMarketplaces);
+
+    const response = [
+      {
+        name: 'Carrefour',
+        key: ['Title', 'Summary'],
+        products: [
+          {
+            Title: 'Jamón cocido Paladini bajo sodio 150 g.',
+            Title_URL: 'https://www.carrefour.com.ar/jamon-cocido-bajo-sodio-paladini-x-150-grs/p',
+            Image: 'https://carrefourar.vtexassets.com/arquivos/ids/192412-170-170?v=1751982053&width=170&height=170&aspect=true',
+            Name: 'pricePerUnit',
+            Price: '413',
+            Price1: '413',
+            Price2: '00',
+            Price3: '00',
+            Price4: '($2753.33 x 1 K.)',
+            Score: 'Comparar',
+          },
+          {
+            Title: "Mayonesa clásica Hellmann's sin tacc doypack 950 g.",
+            Title_URL: 'https://www.carrefour.com.ar/mayonesa-clasica-hellmann-s-sin-tacc-doypack-950-g-694756/p',
+            Image: 'https://carrefourar.vtexassets.com/arquivos/ids/246160-170-170?v=1751982352&width=170&height=170&aspect=true',
+            Price: '479',
+            Price1: '479',
+            Price2: '00',
+            Price3: '00',
+            Price4: '($504.21 x 1 K.)',
+            Score: 'Comparar',
+            Name: 'pricePerUnit',
+            Name5: 'pricePerUnit',
+          },
+          {
+            Image: 'https://carrefourar.vtexassets.com/arquivos/ids/178242-170-170?v=1751976228&width=170&height=170&aspect=true',
+            Summary_URL: 'https://www.carrefour.com.ar/leche-entera-fresca-la-serenisima-sachet-11802/p',
+            Price: '207',
+            Price1: '207',
+            Price2: '00',
+            Price3: '00',
+            Summary: 'Leche entera fresca La Serenísima sachet.',
+            Price6: '($207.00 x 1 L.)',
+            Score: 'Comparar',
+          },
+        ],
+      },
+      {
+        name: 'LaCoppeEnCasa',
+        key: ['Title', 'Title_URL', 'textcapitalize'],
+        products: [
+          {
+            Title: 'jamón cocido paladini reducido en sodio feteado envasado 150grs',
+            card_URL: 'https://www.lacoopeencasa.coop/producto/jamon-cocido-paladini-reducido-en-sodio-feteado-envasado-150grs/708636',
+            Price: '$350',
+            Unit: '$2.333,33/kgs',
+            Avg_price: 'Agregar',
+          },
+          {
+            Title_URL: 'Mayonesa Hellmanns Clasica X475g.',
+            Image:
+              'https://jumboargentina.vteximg.com.br/arquivos/ids/687730-230-230/Mayonesa-Hellmanns-Clasica-X475g-1-884274.jpg?v=637799529678000000',
+            Title_URL1: 'https://www.jumbo.com.ar/mayonesa-hellmanns-clasica-x475g/p',
+            Title: 'HELLMANN´S',
+            Price: '$295',
+            Price2: '$621,05 x kg',
+            productaddtocart__text: 'AGREGAR',
+            text: 'en el carrito',
+          },
+          {
+            card_URL: 'https://www.lacoopeencasa.coop/producto/leche-la-serenisima-entera-clasica-fortificada-3%25-sachet-1lts/707307',
+            textcapitalize: 'leche la serenisima entera clásica fortificada 3% sachet 1lts',
+            Price: '$190',
+            preciodecimal: '00',
+            Unit: '$190,00/lts',
+            Avg_price: 'Agregar',
+          },
+        ],
+      },
+      {
+        name: 'Jumbo',
+        key: ['Title_URL'],
+        products: [
+          {
+            Title_URL: 'Jamón Cocido Paladini Reducido En Sodio X 150g',
+            Image:
+              'https://jumboargentina.vteximg.com.br/arquivos/ids/565566-230-230/Jamon-Cocido-Paladini-Reducido-En-Sodio-X-150g-1-838400.jpg?v=637124517073500000',
+            Title_URL1: 'https://www.jumbo.com.ar/jamon-cocido-paladini-reducido-en-sodio-x-150g/p',
+            Title: 'PALADINI',
+            Price: '$399',
+            Price2: '$2.660 x Kg',
+            productaddtocart__text: 'AGREGAR',
+            text: 'en el carrito',
+          },
+          {
+            Title_URL: 'Mayonesa Hellmanns Clasica X475g.',
+            Image:
+              'https://jumboargentina.vteximg.com.br/arquivos/ids/687730-230-230/Mayonesa-Hellmanns-Clasica-X475g-1-884274.jpg?v=637799529678000000',
+            Title_URL1: 'https://www.jumbo.com.ar/mayonesa-hellmanns-clasica-x475g/p',
+            Title: 'HELLMANN´S',
+            Price: '$295',
+            Price2: '$621,05 x kg',
+            productaddtocart__text: 'AGREGAR',
+            text: 'en el carrito',
+          },
+          {
+            Title_URL: 'Leche Entera Clasica La Serenisima Sachet 1 L',
+            Image:
+              'https://jumboargentina.vteximg.com.br/arquivos/ids/580244-230-230/Leche-Entera-Clasica-La-Serenisima-Sachet-1-L-1-237861.jpg?v=637219129507200000',
+            flag: 'jumbo_mundialal16octsar',
+            Title_URL1: 'https://www.jumbo.com.ar/leche-entera-clasica-la-serenisima-sachet-1-l/p',
+            Title: 'LA SERENISIMA',
+            Price: '$208 x lt',
+            productaddtocart__text: 'AGREGAR',
+            Price2: '$208',
+            text: 'en el carrito',
+          },
+        ],
+      },
+    ];
+
+
     /*const response = [
         {
           product: "Mayonesa clasica Hellmanns 475g",
@@ -170,7 +290,7 @@ class ScrapingService {
           averagePrice: "387,33"
         }
       ] */
-    return data;
+    return response;
   }
 }
 

@@ -4,7 +4,7 @@ export const products: ProductItem[] = [
   {
     id: '1',
     name: 'jamón cocido',
-    brand: 'paladini0',
+    brand: 'paladini',
     type: 'sodio',
     package: '150gr',
   },

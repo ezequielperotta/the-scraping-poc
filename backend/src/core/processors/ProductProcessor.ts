@@ -1,16 +1,17 @@
 import { Product } from '@/core/domain/Product';
 
 export abstract class ProductProcessor {
-  private _rawProductName: string;
-  private _product: Product;
+  protected _rawProductName: string;
+  protected _product: Product;
 
   constructor(product: Product) {
     this._product = product;
     this._rawProductName = this._product.rawName;
   }
 
-  abstract processName(): string;
-  abstract processType(): string;
-  abstract processBrand(): string;
-  abstract processPackage(): string;
+  protected abstract processName();
+  protected abstract processType();
+  protected abstract processBrand();
+  protected abstract processPackage();
+  abstract processProduct(): Product;
 }

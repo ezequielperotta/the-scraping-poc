@@ -1,19 +1,18 @@
 import { ProductProcessor } from '@/core/processors/ProductProcessor';
+import { Product } from '@/core/domain/Product';
 
 export class CarrefourProductProcessor extends ProductProcessor {
-  processBrand(): string {
-    return '';
+  protected processBrand() {
+    this._product.type = 'Mayonesa';
   }
 
-  processName(): string {
-    return '';
-  }
+  protected processName() {}
 
-  processPackage(): string {
-    return '';
-  }
+  protected processPackage() {}
 
-  processType(): string {
-    return '';
+  protected processType() {}
+
+  processProduct(): Product {
+    return this._product;
   }
 }

@@ -15,10 +15,12 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import PriceBox from './components/PriceBox';
 import { Product } from '../../core/domain/Product';
-import Typography from '@mui/material/Typography';
 import CustomModal from './components/CustomModal';
 import { useState } from 'react';
-import { Source } from '../../core/domain/Source';
+import { Button, FormControl, InputLabel, MenuItem } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import SendIcon from '@mui/icons-material/Send';
+import { Source } from '../../core/domain/types';
 
 interface DashboardViewProps {
   toggleDrawer: () => void;
@@ -29,16 +31,22 @@ interface DashboardViewProps {
 const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, products }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [productName, setProductName] = useState<string>('');
-  const [priceS1, setPriceS1] = useState<string>('');
-  const [priceS2, setPriceS2] = useState<string>('');
-  const [priceS3, setPriceS3] = useState<string>('');
+  const [sources, setSources] = useState<Source[]>([]);
+  const [type, setType] = useState<string>('Todos');
+  const [brand, setBrand] = useState<string>('Todas');
 
   const handleProductSelection = (sources: Source[], productName: string) => {
     setProductName(productName);
-    setPriceS1(sources[0].price);
-    setPriceS2(sources[1].price);
-    setPriceS3(sources[2].price);
+    setSources(sources);
     setOpenModal(true);
+  };
+
+  const handleChangeBrand = (event: SelectChangeEvent) => {
+    setBrand(event.target.value as string);
+  };
+
+  const handleChangeType = (event: SelectChangeEvent) => {
+    setType(event.target.value as string);
   };
 
   return (
@@ -77,16 +85,58 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, produ
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Grid container spacing={3} style={{ marginTop: 5 }}>
+            <Grid item xs={4} >
+              <React.Fragment>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Productos</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={brand}
+                    label="Age"
+                    onChange={handleChangeBrand}
+                  >
+                    <MenuItem value={1}>Todas</MenuItem>
+                    <MenuItem value={10}>Mayonesa clasica</MenuItem>
+                    <MenuItem value={20}>Leche entera clasica</MenuItem>
+                    <MenuItem value={30}>Jamon</MenuItem>
+                  </Select>
+                </FormControl>
+              </React.Fragment>
+            </Grid>
+            <Grid item xs={4} >
+              <React.Fragment>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={type}
+                    label="Age"
+                    onChange={handleChangeType}
+                  >
+                    <MenuItem value={10}>450g</MenuItem>
+                    <MenuItem value={20}>x Litro</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </React.Fragment>
+            </Grid>
+            <Grid item xs={2}>
+              <Button size="large" variant="contained" endIcon={<SendIcon />}>
+                Buscar
+              </Button>
+            </Grid>
+          </Grid>
           <CustomModal
             open={openModal}
             setOpen={setOpenModal}
-            priceS1={priceS1}
-            priceS2={priceS2}
-            priceS3={priceS3}
+            sources={sources}
             productName={productName}
           />
-          <Grid container spacing={3}>
-            {products.map((product: Product, index: number) => <PriceBox key={index} title={product.name} price={'$' + product.averagePrice} imageUrl={product.sources[0].imageUrl} sources={product.sources} handleProductSelection={handleProductSelection} /> )}
+          <Grid container spacing={3} style={{ marginTop: 5 }}>
+            {products.map((product: Product, index: number) => <PriceBox key={index} title={product.name} price={'$' + product.averagePrice} imageUrl={product.imageUrl} sources={product.sources} handleProductSelection={handleProductSelection} /> )}
           </Grid>
           <Footer />
         </Container>

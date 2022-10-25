@@ -1,7 +1,7 @@
 import { HttpClient } from './HttpClient';
 import { Product } from '../../domain/Product';
 import { ScrapingService } from '../../domain/ScrapingService';
-import { Source } from '../../domain/Source';
+import { Source } from '../../domain/types';
 
 export class ScrapingHttpService implements ScrapingService {
   private httpClient: HttpClient;
@@ -11,20 +11,41 @@ export class ScrapingHttpService implements ScrapingService {
   }
 
   async getProductList(): Promise<Product[]> {
-    const response = await this.httpClient.get('scraping');
-    return Promise.resolve(this.toProductList(response.data.data));
+
+    const data = [
+      {
+        'name': 'Mayonesa Hellmanns Clasica X475g.',
+        'image': 'https://jumboargentina.vteximg.com.br/arquivos/ids/687730-230-230/Mayonesa-Hellmanns-Clasica-X475g-1-884274.jpg?v=637799529678000000',
+        'average_price': '295',
+        'sources': [{
+          'name': 'Carrefour',
+          'price': '289'
+        },
+        {
+          'name': 'Jumbo',
+          'price': '298'
+        },
+        {
+          'name': 'La coope en casa',
+          'price': '299'
+        }
+        ]
+      },
+    ];
+    // const response = await this.httpClient.get('scraping');
+    return Promise.resolve(this.toProductList(data));
   }
 
   private toProductList(data: Record<string, any>): Product[] {
     return data.map((product: Record<string, any>) => {
       const sources: Source[] = [];
-      const source1 = new Source(product.source1.name, product.source1.price, product.source1.imgURL);
-      const source2 = new Source(product.source2.name, product.source2.price, product.source2.imgURL);
-      const source3 = new Source(product.source3.name, product.source3.price, product.source3.imgURL);
-      sources.push(source1);
-      sources.push(source2);
-      sources.push(source3);
-      return new Product(product.product, product.averagePrice, sources);
+      product.sources.map((source: Record<string, any>) => {
+        return {
+          name: source.name,
+          price: source.price
+        };
+      });
+      return new Product(product.name, product.average_price, product.image, sources);
     });
   }
 }

@@ -2,17 +2,16 @@ import * as React from 'react';
 import { Box, Modal } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Dispatch, SetStateAction } from 'react';
+import { Source } from '../../../core/domain/types';
 
 interface CustomModalProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   productName: string;
-  priceS1: string;
-  priceS2: string;
-  priceS3: string;
+  sources: Source[];
 }
 
-const CustomModal: React.FC<CustomModalProps> = ({ open, setOpen, productName, priceS1, priceS2, priceS3 }) => {
+const CustomModal: React.FC<CustomModalProps> = ({ open, setOpen, productName, sources }) => {
 
   return (
     <Modal
@@ -29,15 +28,10 @@ const CustomModal: React.FC<CustomModalProps> = ({ open, setOpen, productName, p
           <Typography sx={{ mt: 2 }} variant="h6" component="p" color={'cornflowerblue'}>
             {productName}
           </Typography>
-          <Typography sx={{ mt: 1 }} variant="h6" component="p">
-            Carrefour: ${priceS1}
+          {sources.map((source: Source, index: number) => <Typography key={index} sx={{ mt: 1 }} variant="h6" component="p">
+            {source.name + ':' + source.price}
           </Typography>
-          <Typography sx={{ mt: 1 }} variant="h6" component="p">
-            Jumbo: ${priceS2}
-          </Typography>
-          <Typography sx={{ mt: 1 }} variant="h6" component="p">
-            La coope en casa: ${priceS3}
-          </Typography>
+          )}
         </Typography>
       </Box>
     </Modal>

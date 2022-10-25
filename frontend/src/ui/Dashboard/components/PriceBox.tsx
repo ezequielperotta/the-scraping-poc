@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Title from './Title';
 import Grid from '@mui/material/Grid';
 import { Button, Paper } from '@mui/material';
-import { Source } from '../../../core/domain/Source';
+import { Source } from '../../../core/domain/types';
 
 interface PriceBoxProps {
   title: string;

@@ -1,6 +1,6 @@
-import { ProductItem } from '@/types/product';
+import { ProductToSearch } from '@/types/product';
 
-export const products: ProductItem[] = [
+export const productToSearchList: ProductToSearch[] = [
   {
     id: '1',
     name: ['jamón cocido'],

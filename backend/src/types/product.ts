@@ -1,4 +1,4 @@
-export type ProductItem = {
+export type ProductToSearch = {
   id: string;
   name: string[];
   brand: string[];

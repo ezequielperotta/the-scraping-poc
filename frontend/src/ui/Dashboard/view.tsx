@@ -16,7 +16,7 @@ import Header from './components/Header';
 import PriceBox from './components/PriceBox';
 import { Product } from '../../core/domain/Product';
 import CustomModal from './components/CustomModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, FormControl, InputLabel, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import SendIcon from '@mui/icons-material/Send';
@@ -40,6 +40,11 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, produ
     setSources(sources);
     setOpenModal(true);
   };
+
+  useEffect(() => {
+    const arr = [1, 2, 3, 4, 5];
+    console.log(arr.filter((value) => value == 3));
+  });
 
   const handleChangeBrand = (event: SelectChangeEvent) => {
     setBrand(event.target.value as string);

@@ -10,13 +10,14 @@ import LechesLccProducts from './../data/Leches - La Coope en Casa.json';
 import FiambresJumbo from './../data/Fiambres – jumboargentina.json';
 import MayonesasJumbo from './../data/Mayonesa – jumboargentina.json';
 import LechesJumbo from './../data/Leches – jumboargentina.json';
-import { products } from './../data/Products';
+import { productToSearchList } from '../data/ProductToSearchList';
 import { MarketPlaceItem } from '@/types/product';
-import { ProductItem } from '@/types/product';
+import { ProductToSearch } from '@/types/product';
 
 class ScrapingService {
   private listMarketPlace = ['Carrefour', 'LaCoppeEnCasa', 'Jumbo'];
-  private listProducts = products;
+  private listProducts = productToSearchList;
+
   public buildGroupedDataByMarketplace() {
     const resultGropuData = [];
 
@@ -73,9 +74,9 @@ class ScrapingService {
     return resultGropuData;
   }
 
-  private getProductsByNames(data: any, key: string, listProducts: ProductItem[]) {
+  private getProductsByNames(data: any, key: string, listProducts: ProductToSearch[]) {
     const productsFilteredByName = [];
-    listProducts.forEach((product: ProductItem) => {
+    listProducts.forEach((product: ProductToSearch) => {
       const productsByName = this.getProductsByCriteria(data.products, key, product.name);
       const productsByBrand = this.getProductsByCriteria(productsByName, key, product.brand);
       const productsByType = this.getProductsByCriteria(productsByBrand, key, product.type);
@@ -116,6 +117,8 @@ class ScrapingService {
   public async getData(): Promise<any[]> {
     const dataGroupByMarketplaces = this.buildGroupedDataByMarketplace();
     const data = this.searchProducts(dataGroupByMarketplaces);
+
+
 
     /*const response = [
         {

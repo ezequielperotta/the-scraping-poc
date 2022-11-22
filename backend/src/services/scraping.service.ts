@@ -13,6 +13,7 @@ import LechesJumbo from './../data/Leches – jumboargentina.json';
 import { productToSearchList } from '../data/ProductToSearchList';
 import { MarketPlaceItem } from '@/types/product';
 import { ProductToSearch } from '@/types/product';
+import {Mapper} from "@/core/mapper/Mapper";
 
 class ScrapingService {
   private listMarketPlace = ['Carrefour', 'LaCoppeEnCasa', 'Jumbo'];
@@ -118,6 +119,16 @@ class ScrapingService {
     const dataGroupByMarketplaces = this.buildGroupedDataByMarketplace();
     const data = this.searchProducts(dataGroupByMarketplaces);
 
+    // TASK
+    //  1- Carrefour = TODOS LOS PRODUCTOS
+    //  2- Lacoope en casa
+    //  3- Jumbo
+
+
+    const taskCarrefour = new CarrefourTask(taskID);
+    const rawDataCarrefour = taskCarrefour.getData();
+    const mapper = new Mapper(rawDataCarrefour, productToSearchList, 'Carrefour');
+    const products = mapper.getProducts();
 
 
     /*const response = [

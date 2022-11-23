@@ -1,12 +1,7 @@
 import carefourData from '../data/Carrefour.json';
+import { TaskService } from '@/tasks/TaskService';
 
-export class CarrefourTaskService {
-  private _taskID: string;
-
-  constructor(taskID: string) {
-    this._taskID = taskID;
-  }
-
+export class CarrefourTaskService extends TaskService {
   getData(): Record<string, any>[] {
     return carefourData;
   }

@@ -1,20 +1,20 @@
 import { Product } from '@/core/domain/Product';
 import { ProductBuilder } from '@/core/builders/ProductBuilder';
 
-export class CarrefourProductBuilder extends ProductBuilder {
+export class JumboProductBuilder extends ProductBuilder {
   build(): Product {
     this.setProductTitle();
     this.setProductPrice();
-    const product: Product = new Product(this.title, 'Carrefour', this.price, this._rawProduct.Image);
+    const product: Product = new Product(this.title, 'Jumbo', this.price, this._rawProduct.Image);
     product.EAN = this.getEAN();
     return product;
   }
 
   private setProductTitle() {
-    this.title = this._rawProduct.Title || this._rawProduct.Summary;
+    this.title = this._rawProduct.Title_URL;
   }
 
   private setProductPrice() {
-    this.price = `${this._rawProduct.Price},${this._rawProduct.Price2}`;
+    this.price = this._rawProduct.Price;
   }
 }

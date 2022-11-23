@@ -1,12 +1,18 @@
 import { Mapper } from '@/core/mapper/Mapper';
 import { CarrefourTaskService } from '@/tasks/CarrefourTaskService';
+import { JumboTaskService } from '@/tasks/JumboTaskService';
+import { LCCTaskService } from '@/tasks/LCCTaskService';
 
 class ScrapingService {
   public async getData() {
     const taskID = '38976457863249856';
-    const taskCarrefour = new CarrefourTaskService(taskID);
-    const rawDataCarrefour = taskCarrefour.getData();
-    const mapper = new Mapper(rawDataCarrefour, 'Carrefour');
+    // const taskCarrefour = new CarrefourTaskService(taskID);
+    // const rawDataCarrefour = taskCarrefour.getData();
+    // const taskJumbo = new JumboTaskService(taskID);
+    // const rawDataJumbo = taskJumbo.getData();
+    const taskLCC = new LCCTaskService(taskID);
+    const rawDataLCC = taskLCC.getData();
+    const mapper = new Mapper(rawDataLCC, 'La Cope en casa');
     const products = mapper.getProducts();
     return products;
     // saveToLocalDataBase(products);

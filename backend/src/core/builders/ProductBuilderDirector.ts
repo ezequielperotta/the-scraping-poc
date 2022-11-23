@@ -2,6 +2,7 @@ import { SourceType } from '@/core/domain/types';
 import { Product } from '@/core/domain/Product';
 import { CarrefourProductBuilder } from '@/core/builders/CarrefourProductBuilder';
 import { ProductBuilder } from '@/core/builders/ProductBuilder';
+import { ProductToSearch } from '@/types/product';
 
 export class ProductBuilderDirector {
   build(source: SourceType, rawProduct: Record<string, any>): Product {

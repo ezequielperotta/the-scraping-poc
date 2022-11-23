@@ -1,135 +1,15 @@
-/* eslint-disable prettier/prettier */
-import FiambresCarrefour from './../data/Fiambres - Carrefour.json';
-import MayonesasCarrefour from './../data/Mayonesa – Carrefourxlsx.json';
-import LechesCarrefour from './../data/Leches - Carrefour.json';
-
-import FiambresLccProducts from './../data/Fiambres - La Coope en Casa.json';
-import MayonesasLccProducts from './../data/Mayonesa - La Coope en Casa.xlsx.json';
-import LechesLccProducts from './../data/Leches - La Coope en Casa.json';
-
-import FiambresJumbo from './../data/Fiambres – jumboargentina.json';
-import MayonesasJumbo from './../data/Mayonesa – jumboargentina.json';
-import LechesJumbo from './../data/Leches – jumboargentina.json';
-import { productToSearchList } from '../data/ProductToSearchList';
-import { MarketPlaceItem } from '@/types/product';
-import { ProductToSearch } from '@/types/product';
-import {Mapper} from "@/core/mapper/Mapper";
+import { Mapper } from '@/core/mapper/Mapper';
+import { CarrefourTaskService } from '@/tasks/CarrefourTaskService';
 
 class ScrapingService {
-  private listMarketPlace = ['Carrefour', 'LaCoppeEnCasa', 'Jumbo'];
-  private listProducts = productToSearchList;
-
-  public buildGroupedDataByMarketplace() {
-    const resultGropuData = [];
-
-    this.listMarketPlace.forEach((marketPlace: string) => {
-      const marketPlaceItem: MarketPlaceItem = {
-        name: marketPlace,
-        key: this.assaingKeySearch(marketPlace),
-        products: this.concataData(marketPlace),
-      };
-      resultGropuData.push(marketPlaceItem);
-    });
-
-    return resultGropuData;
-  }
-
-  private concataData(marketPlace: string) {
-    switch (marketPlace) {
-      case 'Carrefour':
-        return [].concat(FiambresCarrefour, MayonesasCarrefour, LechesCarrefour);
-      case 'LaCoppeEnCasa':
-        return [].concat(FiambresLccProducts, MayonesasLccProducts, LechesLccProducts);
-      case 'Jumbo':
-        return [].concat(FiambresJumbo, MayonesasJumbo, LechesJumbo);
-    }
-  }
-
-  private assaingKeySearch(marketPlace: string) {
-    switch (marketPlace) {
-      case 'Carrefour':
-        return ['Title', 'Summary'];
-      case 'LaCoppeEnCasa':
-        return ['Title', 'Title_URL', 'textcapitalize'];
-      case 'Jumbo':
-        return ['Title_URL'];
-    }
-  }
-
-  private searchProducts(dataGroupByMarketplaces: any) {
-    const resultGropuData = [];
-    this.listMarketPlace.forEach((marketPlace: string) => {
-      const marketplaceProducts = dataGroupByMarketplaces.find(
-        (dataGroupByMarketplace: MarketPlaceItem) => dataGroupByMarketplace.name == marketPlace,
-      );
-
-      const marketPlaceItem: MarketPlaceItem = {
-        name: marketPlace,
-        key: this.assaingKeySearch(marketPlace),
-        products: this.getProductsByNames(marketplaceProducts, marketplaceProducts.key, this.listProducts),
-      };
-
-      resultGropuData.push(marketPlaceItem);
-    });
-
-    return resultGropuData;
-  }
-
-  private getProductsByNames(data: any, key: string, listProducts: ProductToSearch[]) {
-    const productsFilteredByName = [];
-    listProducts.forEach((product: ProductToSearch) => {
-      const productsByName = this.getProductsByCriteria(data.products, key, product.name);
-      const productsByBrand = this.getProductsByCriteria(productsByName, key, product.brand);
-      const productsByType = this.getProductsByCriteria(productsByBrand, key, product.type);
-      const productsByPackage = this.getProductsByCriteria(productsByType, key, product.package);
-      productsFilteredByName.push(productsByPackage);
-      // productsFilteredByName.push(productsByType);
-    });
-    return productsFilteredByName.flat();
-  }
-
-  private normalizeNFD(word: string) {
-    return word
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
-  }
-
-  private findTerms(product: any, name: string, key: string) {
-    return (
-      (product[key[0]] && this.normalizeNFD(product[key[0]]).includes(this.normalizeNFD(name))) ||
-      (product[key[1]] && this.normalizeNFD(product[key[1]]).includes(this.normalizeNFD(name))) ||
-      (product[key[2]] && this.normalizeNFD(product[key[2]]).includes(this.normalizeNFD(name)))
-    );
-  }
-
-  private getProductsByCriteria(data: any, key: string, findByCriteria: string[]) {
-    const dataToParsed = [];
-    data.forEach(product => {
-      findByCriteria.forEach((name: string) => {
-        if (this.findTerms(product, name, key)) {
-          dataToParsed.push(product);
-        }
-      })
-    });
-    return dataToParsed;
-  }
-
-  public async getData(): Promise<any[]> {
-    const dataGroupByMarketplaces = this.buildGroupedDataByMarketplace();
-    const data = this.searchProducts(dataGroupByMarketplaces);
-
-    // TASK
-    //  1- Carrefour = TODOS LOS PRODUCTOS
-    //  2- Lacoope en casa
-    //  3- Jumbo
-
-
-    const taskCarrefour = new CarrefourTask(taskID);
+  public async getData() {
+    const taskID = '38976457863249856';
+    const taskCarrefour = new CarrefourTaskService(taskID);
     const rawDataCarrefour = taskCarrefour.getData();
-    const mapper = new Mapper(rawDataCarrefour, productToSearchList, 'Carrefour');
+    const mapper = new Mapper(rawDataCarrefour, 'Carrefour');
     const products = mapper.getProducts();
-
+    return products;
+    // saveToLocalDataBase(products);
 
     /*const response = [
         {
@@ -190,7 +70,7 @@ class ScrapingService {
           averagePrice: "387,33"
         }
       ] */
-    return data;
+    // return data;
   }
 }
 

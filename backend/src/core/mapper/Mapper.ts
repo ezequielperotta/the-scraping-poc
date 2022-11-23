@@ -5,13 +5,11 @@ import { ProductBuilderDirector } from '@/core/builders/ProductBuilderDirector';
 
 export class Mapper {
   private readonly _rawData: Record<string, any>[] = [];
-  private readonly _productSearchList: ProductToSearch[];
   private readonly _source: SourceType;
   private _productBuilderDirector: ProductBuilderDirector;
 
-  constructor(rawData: Record<string, any>[], productSearchList: ProductToSearch[], source: SourceType) {
+  constructor(rawData: Record<string, any>[], source: SourceType) {
     this._rawData = rawData;
-    this._productSearchList = productSearchList;
     this._source = source;
     this._productBuilderDirector = new ProductBuilderDirector();
   }

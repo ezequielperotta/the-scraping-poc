@@ -1,14 +1,15 @@
 export class Product {
   private readonly _rawName: string = 'Mayonesa Hellmanns Clasica X475g';
   private readonly _source: string = 'Carrefour';
-  private _brand: string;
-  private _name: string;
-  private _type: string;
-  private _package: string;
+  private readonly _price: string;
+  private readonly _imageUrl: string;
+  private _EAN: string;
 
-  constructor(rawName: string, source: string) {
+  constructor(rawName: string, source: string, price: string, imageUrl: string) {
     this._rawName = rawName;
     this._source = source;
+    this._price = price;
+    this._imageUrl = imageUrl;
   }
 
   get rawName(): string {
@@ -19,38 +20,19 @@ export class Product {
     return this._source;
   }
 
-  set name(value: string) {
-    // Se setea en el preprocesador de producto
-    this._name = value;
+  get imageUrl(): string {
+    return this._imageUrl;
   }
 
-  get name(): string {
-    return this._name;
+  get price(): string {
+    return this._price;
   }
 
-  set brand(value: string) {
-    this._brand = value;
+  get EAN(): string {
+    return this._EAN;
   }
 
-  get brand(): string {
-    return this._brand;
-  }
-
-  set type(value: string) {
-    // Se setea en el preprocesador de producto
-    this._type = value;
-  }
-
-  get type(): string {
-    return this._type;
-  }
-
-  set package(value: string) {
-    // Se setea en el preprocesador de producto
-    this._package = value;
-  }
-
-  get package(): string {
-    return this._package;
+  set EAN(value: string) {
+    this._EAN = value;
   }
 }

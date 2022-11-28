@@ -21,20 +21,20 @@ export class OctoparseHTTPService {
   }
   async getToken(): Promise<any> {
     const data = {
-      username: credentials,
-      password: credentials,
+      username: 'credentials',
+      password: 'credentials',
       grant_type: 'password',
     };
     return await this.httpServiceAxios.post('/token', data, await this.configWithAuthHeader());
   }
 
-  async getExportedData(credentials: CredentialsType): Promise<any> {
+  async getExportedData(credentials: any): Promise<any> {
     const data = {
       username: credentials,
       password: credentials,
       grant_type: 'password',
     };
 
-    return await this.httpClient.post(`/notexported?taskId=${"a3b9bdf7-9aaa-22f6-9ccf-b32790f6df8f"}&size=${size}`, data);
+    return await this.httpServiceAxios.post(`/notexported?taskId=${'a3b9bdf7-9aaa-22f6-9ccf-b32790f6df8f'}&size=${4}`, data);
   }
 }

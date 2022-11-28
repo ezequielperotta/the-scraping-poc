@@ -24,8 +24,9 @@ export class Product {
     return this._imageUrl;
   }
 
-  get price(): string {
-    return this._price;
+  get price(): number {
+    const onlyNumerical = this._price.replace(/^(-)|[^0-9.,]+/g, '$1');
+    return parseFloat(onlyNumerical);
   }
 
   get EAN(): string {

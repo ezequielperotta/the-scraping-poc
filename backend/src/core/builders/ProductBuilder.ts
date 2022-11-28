@@ -14,7 +14,6 @@ export abstract class ProductBuilder {
   }
 
   protected normalizeNFD(word: string) {
-    console.log('WORD', word);
     return word
       .toLowerCase()
       .normalize('NFD')

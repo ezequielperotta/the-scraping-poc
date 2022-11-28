@@ -1,4 +1,3 @@
-import { ProductToSearch } from '@/types/product';
 import { SourceType } from '@/core/domain/types';
 import { Product } from '@/core/domain/Product';
 import { ProductBuilderDirector } from '@/core/builders/ProductBuilderDirector';

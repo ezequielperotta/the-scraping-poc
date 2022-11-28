@@ -7,7 +7,8 @@ class ScrapingController {
   public getData = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const scrapingData = await this.scrapingService.getData();
-      res.status(200).json({ data: scrapingData, message: 'scraping' });
+      const products = await this.scrapingService.getFilteredProducts(scrapingData);
+      res.status(200).json({ data: products, message: 'scraping' });
     } catch (error) {
       next(error);
     }

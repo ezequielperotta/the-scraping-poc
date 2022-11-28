@@ -1,9 +1,10 @@
 export type ProductToSearch = {
   id: string;
   name: string;
-  brand: string;
+  brand: string[];
   type: string[];
   package: string;
+  fullName: string;
 };
 
 export type MarketPlaceItem = {

@@ -26,7 +26,14 @@ export abstract class ProductBuilder {
   }
 
   protected hasSameBrand(product: ProductToSearch) {
-    return this.normalizeNFD(this.title).includes(this.normalizeNFD(product.brand));
+    let found = false;
+    product.brand.forEach((type: string) => {
+      if (!found)
+        if (this.normalizeNFD(this.title).includes(this.normalizeNFD(type))) {
+          found = true;
+        }
+    });
+    return found;
   }
 
   protected hasSamePackage(product: ProductToSearch) {

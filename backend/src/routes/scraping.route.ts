@@ -13,7 +13,8 @@ class ScrapingRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, cors(), this.scrapingController.getData);
+    this.router.get(`${this.path}`, cors(), this.scrapingController.getDataFromScraper);
+    this.router.get(`${this.path}/products`, cors(), this.scrapingController.getProductList);
   }
 }
 

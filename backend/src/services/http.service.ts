@@ -1,7 +1,10 @@
+import { Token } from '@/types/octoparse';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-export class OctoparseHTTPService {
+export class HTTPService {
   private httpServiceAxios: AxiosInstance;
+  private token: String = '';
+  private tokenType: String = '';
 
   constructor() {
     this.httpServiceAxios = axios.create({
@@ -15,26 +18,23 @@ export class OctoparseHTTPService {
   async configWithAuthHeader(): Promise<AxiosRequestConfig> {
     return {
       headers: {
-        Authorization: 'Basic',
+        Authorization: `${this.tokenType} ${this.getToken}`,
       },
     };
   }
-  async getToken(): Promise<any> {
+
+  async getToken(): Promise<Token> {
     const data = {
-      username: 'credentials',
-      password: 'credentials',
+      username: 'ezequiel12',
+      password: 'proyecto404',
       grant_type: 'password',
     };
-    return await this.httpServiceAxios.post('/token', data, await this.configWithAuthHeader());
+
+    const response = await this.httpServiceAxios.post('/token', data, await this.configWithAuthHeader());
+    return response.data;
   }
 
-  async getExportedData(credentials: any): Promise<any> {
-    const data = {
-      username: credentials,
-      password: credentials,
-      grant_type: 'password',
-    };
-
-    return await this.httpServiceAxios.post(`/notexported?taskId=${'a3b9bdf7-9aaa-22f6-9ccf-b32790f6df8f'}&size=${4}`, data);
+  async getExportedData(taskId: string): Promise<any> {
+    return await this.httpServiceAxios.get(`/notexported?taskId=${taskId}&size=${4}`);
   }
 }

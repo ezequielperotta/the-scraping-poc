@@ -29,7 +29,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ open, setOpen, productName, s
             {productName}
           </Typography>
           {sources.map((source: Source, index: number) => <Typography key={index} sx={{ mt: 1 }} variant="h6" component="p">
-            {source.name + ':' + source.price}
+            {source.name + ': $' + source.price}
           </Typography>
           )}
         </Typography>

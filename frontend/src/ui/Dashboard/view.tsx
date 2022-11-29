@@ -90,50 +90,50 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, produ
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3} style={{ marginTop: 5 }}>
-            <Grid item xs={4} >
-              <React.Fragment>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Productos</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={brand}
-                    label="Age"
-                    onChange={handleChangeBrand}
-                  >
-                    <MenuItem value={1}>Todas</MenuItem>
-                    <MenuItem value={10}>Mayonesa clasica</MenuItem>
-                    <MenuItem value={20}>Leche entera clasica</MenuItem>
-                    <MenuItem value={30}>Jamon</MenuItem>
-                  </Select>
-                </FormControl>
-              </React.Fragment>
-            </Grid>
-            <Grid item xs={4} >
-              <React.Fragment>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={type}
-                    label="Age"
-                    onChange={handleChangeType}
-                  >
-                    <MenuItem value={10}>450g</MenuItem>
-                    <MenuItem value={20}>x Litro</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
-              </React.Fragment>
-            </Grid>
-            <Grid item xs={2}>
-              <Button size="large" variant="contained" endIcon={<SendIcon />}>
-                Buscar
-              </Button>
-            </Grid>
-          </Grid>
+          {/*<Grid container spacing={3} style={{ marginTop: 5 }}>*/}
+          {/*  <Grid item xs={4} >*/}
+          {/*    <React.Fragment>*/}
+          {/*      <FormControl fullWidth>*/}
+          {/*        <InputLabel id="demo-simple-select-label">Productos</InputLabel>*/}
+          {/*        <Select*/}
+          {/*          labelId="demo-simple-select-label"*/}
+          {/*          id="demo-simple-select"*/}
+          {/*          value={brand}*/}
+          {/*          label="Age"*/}
+          {/*          onChange={handleChangeBrand}*/}
+          {/*        >*/}
+          {/*          <MenuItem value={1}>Todas</MenuItem>*/}
+          {/*          <MenuItem value={10}>Mayonesa clasica</MenuItem>*/}
+          {/*          <MenuItem value={20}>Leche entera clasica</MenuItem>*/}
+          {/*          <MenuItem value={30}>Jamon</MenuItem>*/}
+          {/*        </Select>*/}
+          {/*      </FormControl>*/}
+          {/*    </React.Fragment>*/}
+          {/*  </Grid>*/}
+          {/*  <Grid item xs={4} >*/}
+          {/*    <React.Fragment>*/}
+          {/*      <FormControl fullWidth>*/}
+          {/*        <InputLabel id="demo-simple-select-label">Tipo</InputLabel>*/}
+          {/*        <Select*/}
+          {/*          labelId="demo-simple-select-label"*/}
+          {/*          id="demo-simple-select"*/}
+          {/*          value={type}*/}
+          {/*          label="Age"*/}
+          {/*          onChange={handleChangeType}*/}
+          {/*        >*/}
+          {/*          <MenuItem value={10}>450g</MenuItem>*/}
+          {/*          <MenuItem value={20}>x Litro</MenuItem>*/}
+          {/*          <MenuItem value={30}>Thirty</MenuItem>*/}
+          {/*        </Select>*/}
+          {/*      </FormControl>*/}
+          {/*    </React.Fragment>*/}
+          {/*  </Grid>*/}
+          {/*  <Grid item xs={2}>*/}
+          {/*    <Button size="large" variant="contained" endIcon={<SendIcon />}>*/}
+          {/*      Buscar*/}
+          {/*    </Button>*/}
+          {/*  </Grid>*/}
+          {/*</Grid>*/}
           <CustomModal
             open={openModal}
             setOpen={setOpenModal}

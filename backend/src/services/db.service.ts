@@ -6,11 +6,11 @@ class ProductDBService {
   public products = productModel;
 
   public async haveProductsDB() {
-    return await this.products.countDocuments();
+    return this.products.countDocuments();
   }
 
   public async getProductsDB() {
-    return await this.products.find();
+    return this.products.find();
   }
 
   public async setProductDB(products) {

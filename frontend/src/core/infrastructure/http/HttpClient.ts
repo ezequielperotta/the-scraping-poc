@@ -9,7 +9,7 @@ export class HttpClient {
   private http: AxiosInstance;
   private httpForm: AxiosInstance;
   private readonly sessionStorage: SessionStorage;
-  private baseUrl: string = 'http://localhost:3001/';
+  private baseUrl: string = 'http://localhost:3001/scraping';
 
   constructor(session: SessionStorage) {
     this.sessionStorage = session;

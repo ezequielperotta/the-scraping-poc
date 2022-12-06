@@ -32,8 +32,9 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, produ
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [productName, setProductName] = useState<string>('');
   const [sources, setSources] = useState<Source[]>([]);
-  const [type, setType] = useState<string>('Todos');
-  const [brand, setBrand] = useState<string>('Todas');
+  const [productSearch, setProductSearch] = useState<string>('Todos');
+  const [brandSearch, setBrandSearch] = useState<string>('Todas');
+  const [typeSearch, setTypeSearch] = useState<string>('Todos');
 
   const handleProductSelection = (sources: Source[], productName: string) => {
     setProductName(productName);
@@ -46,12 +47,16 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, produ
     console.log(arr.filter((value) => value == 3));
   });
 
-  const handleChangeBrand = (event: SelectChangeEvent) => {
-    setBrand(event.target.value as string);
+  const handleChangeProductSearch = (event: SelectChangeEvent) => {
+    setProductSearch(event.target.value as string);
   };
 
-  const handleChangeType = (event: SelectChangeEvent) => {
-    setType(event.target.value as string);
+  const handleChangeBrandSearch = (event: SelectChangeEvent) => {
+    setBrandSearch(event.target.value as string);
+  };
+
+  const handleChangeTypeSearch = (event: SelectChangeEvent) => {
+    setTypeSearch(event.target.value as string);
   };
 
   return (
@@ -90,50 +95,69 @@ const DashboardView: React.FC<DashboardViewProps> = ({ toggleDrawer, open, produ
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          {/*<Grid container spacing={3} style={{ marginTop: 5 }}>*/}
-          {/*  <Grid item xs={4} >*/}
-          {/*    <React.Fragment>*/}
-          {/*      <FormControl fullWidth>*/}
-          {/*        <InputLabel id="demo-simple-select-label">Productos</InputLabel>*/}
-          {/*        <Select*/}
-          {/*          labelId="demo-simple-select-label"*/}
-          {/*          id="demo-simple-select"*/}
-          {/*          value={brand}*/}
-          {/*          label="Age"*/}
-          {/*          onChange={handleChangeBrand}*/}
-          {/*        >*/}
-          {/*          <MenuItem value={1}>Todas</MenuItem>*/}
-          {/*          <MenuItem value={10}>Mayonesa clasica</MenuItem>*/}
-          {/*          <MenuItem value={20}>Leche entera clasica</MenuItem>*/}
-          {/*          <MenuItem value={30}>Jamon</MenuItem>*/}
-          {/*        </Select>*/}
-          {/*      </FormControl>*/}
-          {/*    </React.Fragment>*/}
-          {/*  </Grid>*/}
-          {/*  <Grid item xs={4} >*/}
-          {/*    <React.Fragment>*/}
-          {/*      <FormControl fullWidth>*/}
-          {/*        <InputLabel id="demo-simple-select-label">Tipo</InputLabel>*/}
-          {/*        <Select*/}
-          {/*          labelId="demo-simple-select-label"*/}
-          {/*          id="demo-simple-select"*/}
-          {/*          value={type}*/}
-          {/*          label="Age"*/}
-          {/*          onChange={handleChangeType}*/}
-          {/*        >*/}
-          {/*          <MenuItem value={10}>450g</MenuItem>*/}
-          {/*          <MenuItem value={20}>x Litro</MenuItem>*/}
-          {/*          <MenuItem value={30}>Thirty</MenuItem>*/}
-          {/*        </Select>*/}
-          {/*      </FormControl>*/}
-          {/*    </React.Fragment>*/}
-          {/*  </Grid>*/}
-          {/*  <Grid item xs={2}>*/}
-          {/*    <Button size="large" variant="contained" endIcon={<SendIcon />}>*/}
-          {/*      Buscar*/}
-          {/*    </Button>*/}
-          {/*  </Grid>*/}
-          {/*</Grid>*/}
+          <Grid container spacing={3} style={{ marginTop: 5 }}>
+            <Grid item xs={4} >
+              <React.Fragment>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Producto</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={productSearch}
+                    label="Age"
+                    onChange={handleChangeProductSearch}
+                  >
+                    <MenuItem value={1}>Todas</MenuItem>
+                    <MenuItem value={10}>Mayonesa</MenuItem>
+                    <MenuItem value={20}>Leche</MenuItem>
+                    <MenuItem value={30}>Jamón cocido</MenuItem>
+                  </Select>
+                </FormControl>
+              </React.Fragment>
+            </Grid>
+            <Grid item xs={3} >
+              <React.Fragment>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Marca</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={brandSearch}
+                    label="Age"
+                    onChange={handleChangeBrandSearch}
+                  >
+                    <MenuItem value={1}>Todas</MenuItem>
+                    <MenuItem value={10}>Hellmans</MenuItem>
+                    <MenuItem value={20}>Paladini</MenuItem>
+                    <MenuItem value={30}>La serenisima</MenuItem>
+                  </Select>
+                </FormControl>
+              </React.Fragment>
+            </Grid>
+            <Grid item xs={3} >
+              <React.Fragment>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={typeSearch}
+                    label="Age"
+                    onChange={handleChangeTypeSearch}
+                  >
+                    <MenuItem value={10}>Clásica 475g</MenuItem>
+                    <MenuItem value={20}>Entera x Litro</MenuItem>
+                    <MenuItem value={30}>Reducido en sodio 150g</MenuItem>
+                  </Select>
+                </FormControl>
+              </React.Fragment>
+            </Grid>
+            <Grid item xs={2}>
+              <Button size="large" variant="contained" endIcon={<SendIcon />}>
+                Buscar
+              </Button>
+            </Grid>
+          </Grid>
           <CustomModal
             open={openModal}
             setOpen={setOpenModal}
